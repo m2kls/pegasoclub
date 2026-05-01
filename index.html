@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Pegaso Club ayuda a empresas a crecer con estrategia digital, páginas web, SEO, automatización y marketing." />
+  <title>Pegaso Club | Estrategia, Webs y Automatización</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #070807;
+      --bg-soft: #0d100b;
+      --panel: rgba(255, 255, 255, 0.065);
+      --panel-strong: rgba(255, 255, 255, 0.105);
+      --text: #f7f2e8;
+      --muted: #bdb7aa;
+      --cream: #eee1c6;
+      --olive: #9aaa68;
+      --olive-dark: #66743b;
+      --gold: #d9c48f;
+      --line: rgba(255, 255, 255, 0.13);
+      --shadow: 0 34px 110px rgba(0, 0, 0, 0.58);
+      --radius-xl: 44px;
+      --radius-lg: 32px;
+      --radius-md: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(154, 170, 104, 0.28), transparent 32%),
+        radial-gradient(circle at 90% 2%, rgba(217, 196, 143, 0.13), transparent 30%),
+        linear-gradient(180deg, var(--bg), var(--bg-soft) 48%, #050605);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -80px;
+      left: 12px;
+      z-index: 1000;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--cream);
+      color: #070807;
+      font-weight: 900;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--olive), var(--gold), var(--cream));
+      box-shadow: 0 0 24px rgba(154, 170, 104, 0.6);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      z-index: 0;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(154, 170, 104, 0.12), transparent 65%);
+      transform: translate(-50%, -50%);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 8, 7, 0.78);
+      backdrop-filter: blur(20px);
+    }
+
+    .navbar {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #f3f0ea;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .pegaso-sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .pegaso-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: #171610;
+    }
+
+    .brand-logo .pegaso-svg {
+      width: 86%;
+      height: 86%;
+      transform: translateX(1px);
+    }
+
+    .avatar .pegaso-svg {
+      width: 82%;
+      height: 82%;
+      transform: translateX(1px);
+    }
+
+    .pegaso-emblem .pegaso-svg {
+      width: 82%;
+      height: 82%;
+      transform: translateX(2px);
+    }
+
+    .logo-watermark {
+      position: absolute;
+      right: -40px;
+      top: 34px;
+      z-index: 1;
+      width: 360px;
+      height: 304px;
+      color: rgba(238, 225, 198, 0.055);
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cream);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -9px;
+      left: 0;
+      height: 2px;
+      border-radius: 20px;
+      background: var(--olive);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: rgba(7, 8, 7, 0.94);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 14px 19px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      border-color: transparent;
+      background: var(--cream);
+      color: #070807;
+      box-shadow: 0 14px 40px rgba(233, 221, 194, 0.14);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.065);
+      color: var(--text);
+    }
+
+    .button-dark {
+      background: #070807;
+      color: var(--cream);
+    }
+
+    .hero {
+      padding: 88px 0 76px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 46px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 9px 14px;
+      border: 1px solid rgba(154, 170, 104, 0.28);
+      border-radius: 999px;
+      background: rgba(154, 170, 104, 0.13);
+      color: var(--cream);
+      font-size: 0.76rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4d5f;
+      box-shadow: 0 0 22px #ff4d5f;
+    }
+
+    h1 {
+      max-width: 940px;
+      margin-bottom: 28px;
+      font-size: clamp(3.45rem, 7.2vw, 7.15rem);
+      line-height: 0.86;
+      letter-spacing: -0.087em;
+    }
+
+    .highlight {
+      color: var(--olive);
+    }
+
+    .hero-lead {
+      max-width: 700px;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 1.17rem;
+      line-height: 1.75;
+    }
+
+    .brand-signature {
+      width: fit-content;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      padding: 10px 14px 10px 10px;
+      border: 1px solid rgba(238, 225, 198, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.052);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .brand-signature-mark {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #f3f0ea;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.24);
+    }
+
+    .brand-signature-mark .pegaso-svg {
+      width: 84%;
+      height: 84%;
+      transform: translateX(1px);
+    }
+
+    .brand-signature span:last-child {
+      color: var(--cream);
+      font-size: 0.88rem;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .proof-card,
+    .trust-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.048);
+    }
+
+    .proof-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.36rem;
+      letter-spacing: -0.055em;
+    }
+
+    .proof-card span,
+    .trust-card {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .mobile-metrics {
+      display: none;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .trust-card b {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 630px;
+      padding: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: -25%;
+      background: radial-gradient(circle, rgba(154, 170, 104, 0.36), transparent 45%);
+      animation: drift 8s ease-in-out infinite;
+    }
+
+    @keyframes drift {
+      0%, 100% {
+        transform: translate(-4%, -2%) scale(1);
+      }
+
+      50% {
+        transform: translate(8%, 7%) scale(1.1);
+      }
+    }
+
+    .phone-card {
+      position: relative;
+      z-index: 2;
+      width: min(390px, 100%);
+      margin: auto;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 42px;
+      background: #090c10;
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.5);
+    }
+
+    .phone-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 2px 20px;
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .instagram-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      flex: 0 0 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f3f0ea;
+    }
+
+    .profile-bubble {
+      position: absolute;
+      top: -34px;
+      left: 24px;
+      max-width: 114px;
+      padding: 11px 13px;
+      border-radius: 20px;
+      background: #30363d;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.82rem;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .instagram-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      flex: 1;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .instagram-stats strong {
+      display: block;
+      font-size: 1.42rem;
+      letter-spacing: -0.06em;
+    }
+
+    .instagram-stats span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.78rem;
+    }
+
+    .instagram-bio {
+      margin-bottom: 18px;
+      color: #fff;
+      font-size: 0.98rem;
+      line-height: 1.34;
+    }
+
+    .instagram-insight {
+      margin-bottom: 16px;
+      padding: 14px;
+      border-radius: 17px;
+      background: #2a3037;
+    }
+
+    .instagram-insight strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .instagram-insight span {
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .green-text {
+      color: #48d47e;
+    }
+
+    .phone-preview {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(154, 170, 104, 0.32), rgba(233, 221, 194, 0.08));
+    }
+
+    .pegaso-emblem {
+      width: 170px;
+      height: 170px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #f3f0ea;
+    }
+
+    .hero-note {
+      position: absolute;
+      right: 28px;
+      bottom: 30px;
+      z-index: 3;
+      width: min(300px, calc(100% - 56px));
+      padding: 19px;
+      border-radius: 24px;
+      background: rgba(233, 221, 194, 0.96);
+      color: #080908;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-note p {
+      color: rgba(8, 9, 8, 0.72);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    section {
+      padding: 84px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 34px;
+    }
+
+    .section-header h2 {
+      max-width: 820px;
+      font-size: clamp(2.25rem, 4.3vw, 4.8rem);
+      line-height: 0.93;
+      letter-spacing: -0.078em;
+    }
+
+    .section-header p {
+      max-width: 455px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: radial-gradient(circle at 30% 0%, rgba(154, 170, 104, 0.17), transparent 44%);
+      transition: opacity 0.22s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      background: var(--panel-strong);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 40px;
+      border: 1px solid rgba(154, 170, 104, 0.24);
+      border-radius: 20px;
+      background: rgba(154, 170, 104, 0.16);
+      color: var(--cream);
+      font-size: 1.45rem;
+    }
+
+    .service-card h3 {
+      position: relative;
+      margin-bottom: 12px;
+      font-size: 1.34rem;
+      letter-spacing: -0.045em;
+    }
+
+    .service-card p {
+      position: relative;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.66;
+    }
+
+    .manifesto-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 34px;
+      padding: 46px;
+      border: 1px solid rgba(154, 170, 104, 0.23);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(154, 170, 104, 0.24), rgba(255, 255, 255, 0.05));
+      box-shadow: var(--shadow);
+    }
+
+    .manifesto-card h2 {
+      font-size: clamp(2.35rem, 4.8vw, 5.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+    }
+
+    .quotes-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .quote-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.22);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .quote-card span {
+      color: var(--olive);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      counter-reset: step;
+    }
+
+    .step-card {
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.052);
+      counter-increment: step;
+    }
+
+    .step-card::before {
+      content: "0" counter(step);
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 34px;
+      border-radius: 18px;
+      background: var(--cream);
+      color: #080908;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+    }
+
+    .step-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .seo-panel {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      min-height: 480px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: #0b0d0a;
+      box-shadow: var(--shadow);
+    }
+
+    .seo-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    .seo-copy h2 {
+      margin-bottom: 22px;
+      font-size: clamp(2.45rem, 5.1vw, 5.3rem);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+    }
+
+    .seo-copy p {
+      max-width: 610px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .search-preview-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 34px;
+      background: linear-gradient(145deg, rgba(154, 170, 104, 0.22), rgba(255, 255, 255, 0.04));
+    }
+
+    .search-preview {
+      width: 100%;
+      max-width: 440px;
+      padding: 22px;
+      border-radius: 30px;
+      background: rgba(247, 243, 232, 0.97);
+      color: #161616;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+    }
+
+    .searchbar {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 0 18px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 999px;
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 0.9rem;
+    }
+
+    .search-result {
+      margin-bottom: 10px;
+      padding: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .search-result:first-of-type {
+      border: 2px solid var(--olive);
+      box-shadow: 0 14px 40px rgba(103, 116, 61, 0.16);
+    }
+
+    .search-result span {
+      display: inline-flex;
+      margin-bottom: 6px;
+      color: #4b622b;
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .search-result h4 {
+      margin-bottom: 6px;
+      color: #1a0dab;
+    }
+
+    .search-result p {
+      color: #505050;
+      font-size: 0.83rem;
+      line-height: 1.45;
+    }
+
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+    }
+
+    .diagnostic-card,
+    .calculator-card {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--shadow);
+    }
+
+    .diagnostic-card h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2.2rem, 4.6vw, 4.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
+    }
+
+    .diagnostic-card p,
+    .calculator-card p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 28px 0 18px;
+    }
+
+    .tab-button {
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      border-color: transparent;
+      background: var(--cream);
+      color: #080908;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: grid;
+      gap: 11px;
+      animation: fade-up 0.45s ease both;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .audit-item {
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.22);
+      color: var(--cream);
+      font-weight: 780;
+    }
+
+    .calculator-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.55rem;
+      letter-spacing: -0.055em;
+    }
+
+    .range-group {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .range-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--cream);
+      font-weight: 850;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--olive);
+    }
+
+    .calculator-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .calculator-result {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(233, 221, 194, 0.95);
+      color: #080908;
+    }
+
+    .calculator-result strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.6rem;
+      letter-spacing: -0.07em;
+    }
+
+    .calculator-result span {
+      display: block;
+      color: rgba(8, 9, 8, 0.67);
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .growth-grid,
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .growth-card,
+    .plan-card,
+    .faq-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+    }
+
+    .growth-card {
+      min-height: 250px;
+    }
+
+    .growth-card strong {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--olive);
+      font-size: 2.9rem;
+      letter-spacing: -0.08em;
+    }
+
+    .growth-card h3,
+    .faq-card h3 {
+      margin-bottom: 10px;
+      letter-spacing: -0.045em;
+    }
+
+    .growth-card p,
+    .faq-card p,
+    .plan-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .plan-card {
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .plan-card.featured {
+      color: #080908;
+      background: linear-gradient(160deg, rgba(233, 221, 194, 0.94), rgba(154, 170, 104, 0.88));
+      box-shadow: var(--shadow);
+      transform: translateY(-10px);
+    }
+
+    .plan-card.featured p,
+    .plan-card.featured ul {
+      color: rgba(8, 9, 8, 0.76);
+    }
+
+    .plan-tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(154, 170, 104, 0.14);
+      color: var(--cream);
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .plan-card.featured .plan-tag {
+      background: rgba(8, 9, 8, 0.12);
+      color: #080908;
+    }
+
+    .plan-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.65rem;
+      letter-spacing: -0.055em;
+    }
+
+    .plan-card ul {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .plan-card li::before {
+      content: "✓";
+      margin-right: 10px;
+      color: var(--olive);
+      font-weight: 950;
+    }
+
+    .plan-card.featured li::before {
+      color: #080908;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .faq-card {
+      cursor: pointer;
+      transition: background 0.22s ease;
+    }
+
+    .faq-card:hover {
+      background: rgba(255, 255, 255, 0.085);
+    }
+
+    .faq-card h3 {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq-card h3::after {
+      content: "+";
+      color: var(--olive);
+      font-size: 1.35rem;
+    }
+
+    .faq-card.open h3::after {
+      content: "−";
+    }
+
+    .faq-card p {
+      max-height: 0;
+      margin: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease, margin 0.28s ease;
+    }
+
+    .faq-card.open p {
+      max-height: 180px;
+      margin-top: 10px;
+    }
+
+    .cta-section {
+      padding-bottom: 112px;
+    }
+
+    .cta-box {
+      padding: 72px 34px;
+      border: 1px solid var(--line);
+      border-radius: 48px;
+      background:
+        radial-gradient(circle at top, rgba(154, 170, 104, 0.34), transparent 42%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 20px;
+      font-size: clamp(2.75rem, 6vw, 6.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.09em;
+    }
+
+    .cta-box p {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.78;
+    }
+
+    .contact-form {
+      max-width: 820px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 30px auto 0;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      outline: none;
+      background: rgba(5, 5, 5, 0.45);
+      color: var(--text);
+    }
+
+    .form-textarea {
+      min-height: 130px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+
+    .contact-form .button {
+      grid-column: 1 / -1;
+    }
+
+    .form-note {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .site-footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .sticky-contact {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 90;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 17px;
+      border-radius: 999px;
+      background: var(--cream);
+      color: #080908;
+      font-weight: 950;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+      transform: translateY(110px);
+      transition: transform 0.28s ease;
+    }
+
+    .sticky-contact.visible {
+      transform: translateY(0);
+    }
+
+    .mobile-bottom-nav {
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      z-index: 100;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: rgba(233, 221, 194, 0.96);
+      color: #080908;
+      font-weight: 900;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+      transform: translate(-50%, 120px);
+      transition: transform 0.28s ease;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1020px) {
+      .hero-grid,
+      .manifesto-card,
+      .seo-panel,
+      .diagnostic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .growth-grid,
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-card.featured {
+        transform: none;
+      }
+
+      .hero-visual {
+        min-height: auto;
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      body {
+        background:
+          radial-gradient(circle at 50% -5%, rgba(154, 170, 104, 0.22), transparent 35%),
+          linear-gradient(180deg, #070807, #090b08 48%, #050605);
+      }
+
+      body::before {
+        opacity: 0.72;
+        background-size: 38px 38px;
+      }
+
+      .navbar {
+        height: 68px;
+      }
+
+      .brand-logo {
+        width: 43px;
+        height: 43px;
+      }
+
+      .brand-name {
+        font-size: 1rem;
+      }
+
+      .nav-links,
+      .desktop-cta {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: grid;
+        place-items: center;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 78px;
+        right: 12px;
+        left: 12px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.55);
+      }
+
+      .hero {
+        padding: 42px 0 54px;
+      }
+
+      .hero-grid {
+        gap: 26px;
+      }
+
+      .eyebrow {
+        max-width: 100%;
+        margin-bottom: 18px;
+        font-size: 0.68rem;
+        white-space: normal;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: clamp(3rem, 15vw, 4.65rem);
+        line-height: 0.88;
+        letter-spacing: -0.095em;
+      }
+
+      .hero-lead {
+        margin-bottom: 18px;
+        font-size: 1.02rem;
+        line-height: 1.66;
+      }
+
+      .brand-signature {
+        width: 100%;
+        align-items: center;
+        margin-bottom: 24px;
+        border-radius: 22px;
+      }
+
+      .brand-signature span:last-child {
+        font-size: 0.8rem;
+      }
+
+      .logo-watermark {
+        right: -88px;
+        top: 20px;
+        width: 280px;
+        height: 236px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 11px;
+      }
+
+      .button {
+        width: 100%;
+        min-height: 52px;
+        padding: 15px 17px;
+      }
+
+      .proof-grid {
+        display: none;
+      }
+
+      .mobile-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .mobile-metrics div {
+        padding: 12px 10px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.055);
+        text-align: center;
+      }
+
+      .mobile-metrics strong {
+        display: block;
+        color: var(--cream);
+        font-size: 1rem;
+      }
+
+      .mobile-metrics span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 0.68rem;
+        line-height: 1.25;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+      }
+
+      .trust-card {
+        padding: 13px;
+        border-radius: 17px;
+        font-size: 0.78rem;
+      }
+
+      .trust-card b {
+        font-size: 0.86rem;
+      }
+
+      .hero-visual {
+        min-height: 0;
+        padding: 14px;
+        border-radius: var(--radius-lg);
+      }
+
+      .phone-card {
+        width: 100%;
+        padding: 14px;
+        border-radius: var(--radius-lg);
+      }
+
+      .phone-topbar {
+        padding-bottom: 15px;
+        font-size: 0.9rem;
+      }
+
+      .avatar {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+      }
+
+      .profile-bubble {
+        top: -28px;
+        left: 12px;
+        padding: 8px 10px;
+        font-size: 0.68rem;
+      }
+
+      .instagram-stats {
+        gap: 7px;
+      }
+
+      .instagram-stats strong {
+        font-size: 1.05rem;
+      }
+
+      .instagram-stats span {
+        font-size: 0.66rem;
+      }
+
+      .instagram-bio {
+        font-size: 0.88rem;
+      }
+
+      .pegaso-emblem {
+        width: 128px;
+        height: 128px;
+      }
+
+      .hero-note {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        margin-top: 14px;
+        padding: 16px;
+        border-radius: var(--radius-md);
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .section-header h2 {
+        font-size: clamp(2.25rem, 11vw, 3.45rem);
+        line-height: 0.92;
+      }
+
+      .section-header p {
+        font-size: 0.96rem;
+        line-height: 1.65;
+      }
+
+      .services-grid,
+      .steps-grid,
+      .growth-grid,
+      .plans-grid,
+      .faq-grid,
+      .diagnostic-grid,
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .steps-grid {
+        gap: 12px;
+      }
+
+      .service-card {
+        min-height: 0;
+        padding: 20px;
+        border-radius: 26px;
+      }
+
+      .service-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 26px;
+        border-radius: 18px;
+      }
+
+      .service-card h3 {
+        font-size: 1.22rem;
+      }
+
+      .service-card p,
+      .step-card p,
+      .growth-card p,
+      .faq-card p,
+      .plan-card p {
+        font-size: 0.92rem;
+      }
+
+      .manifesto-card,
+      .seo-copy,
+      .search-preview-wrap,
+      .diagnostic-card,
+      .calculator-card,
+      .cta-box {
+        padding: 24px;
+      }
+
+      .manifesto-card,
+      .seo-panel {
+        border-radius: var(--radius-lg);
+      }
+
+      .quote-card {
+        padding: 16px;
+        border-radius: 19px;
+        font-size: 0.94rem;
+      }
+
+      .step-card {
+        min-height: 0;
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .step-card::before {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 20px;
+        border-radius: 16px;
+      }
+
+      .seo-copy h2,
+      .diagnostic-card h2,
+      .cta-box h2 {
+        font-size: clamp(2.35rem, 12vw, 3.65rem);
+      }
+
+      .search-preview {
+        padding: 17px;
+        border-radius: 24px;
+      }
+
+      .searchbar {
+        min-height: 48px;
+        font-size: 0.8rem;
+      }
+
+      .search-result {
+        padding: 14px;
+      }
+
+      .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        scrollbar-width: none;
+      }
+
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab-button {
+        flex: 0 0 auto;
+      }
+
+      .tab-panel.active {
+        gap: 9px;
+      }
+
+      .audit-item {
+        font-size: 0.9rem;
+      }
+
+      .calculator-results {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .growth-card,
+      .plan-card,
+      .faq-card {
+        padding: 22px;
+        border-radius: 26px;
+      }
+
+      .growth-card,
+      .plan-card {
+        min-height: 0;
+      }
+
+      .growth-card strong {
+        margin-bottom: 10px;
+        font-size: 2.35rem;
+      }
+
+      .plan-card {
+        gap: 24px;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 15px 16px;
+        border-radius: 16px;
+        font-size: 16px;
+      }
+
+      .form-textarea,
+      .contact-form .button,
+      .form-note {
+        grid-column: auto;
+      }
+
+      .form-textarea {
+        min-height: 112px;
+      }
+
+      .cta-section {
+        padding-bottom: 118px;
+      }
+
+      .site-footer {
+        padding-bottom: 92px;
+      }
+
+      .footer-inner {
+        display: grid;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .sticky-contact {
+        display: none;
+      }
+
+      .mobile-bottom-nav {
+        position: fixed;
+        right: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom));
+        left: 10px;
+        z-index: 95;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(7, 8, 7, 0.86);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.52);
+      }
+
+      .mobile-bottom-nav a {
+        min-height: 58px;
+        display: grid;
+        place-items: center;
+        gap: 2px;
+        border-right: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 900;
+      }
+
+      .mobile-bottom-nav a:last-child {
+        border-right: 0;
+      }
+
+      .mobile-bottom-nav b {
+        display: block;
+        color: var(--cream);
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      .mobile-bottom-nav a:active,
+      .mobile-bottom-nav a.active {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--cream);
+      }
+
+      .toast {
+        right: 14px;
+        bottom: 88px;
+        left: 14px;
+        border-radius: 22px;
+        text-align: center;
+        transform: translateY(130px);
+      }
+
+      .toast.show {
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: min(100% - 22px, 1180px);
+      }
+
+      h1 {
+        font-size: 3.25rem;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-card {
+        padding: 12px;
+      }
+
+      .instagram-head {
+        gap: 10px;
+      }
+
+      .avatar {
+        width: 66px;
+        height: 66px;
+        flex-basis: 66px;
+      }
+
+      .instagram-stats strong {
+        font-size: 0.98rem;
+      }
+
+      .instagram-stats span {
+        font-size: 0.61rem;
+      }
+
+      .instagram-bio {
+        font-size: 0.82rem;
+      }
+
+      .instagram-insight {
+        font-size: 0.86rem;
+      }
+
+      .search-result h4 {
+        font-size: 0.92rem;
+      }
+
+      .search-result p {
+        font-size: 0.78rem;
+      }
+
+      .mobile-bottom-nav a {
+        font-size: 0.62rem;
+      }
+
+      .mobile-bottom-nav b {
+        font-size: 0.92rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .cursor-glow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#contacto">Saltar al diagnóstico</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <svg class="pegaso-sprite" aria-hidden="true" focusable="false" width="0" height="0" xmlns="http://www.w3.org/2000/svg"><symbol id="pegaso-mark" viewBox="0 0 320 270"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M199 26 L192 32 L186 41 L178 49 L161 61 L160 59 L163 56 L163 54 L161 53 L158 55 L155 54 L161 44 L160 42 L156 41 L160 32 L155 30 L160 19 L157 18 L153 20 L147 26 L147 28 L145 29 L144 33 L135 46 L129 50 L127 54 L107 74 L104 82 L105 89 L104 90 L106 95 L105 97 L107 98 L105 100 L101 99 L98 100 L94 98 L93 92 L85 93 L83 91 L84 89 L83 88 L79 88 L74 91 L65 92 L64 89 L61 88 L53 92 L43 100 L41 104 L23 121 L19 127 L20 133 L25 137 L30 136 L36 130 L49 130 L56 126 L61 127 L63 132 L66 134 L65 136 L67 138 L69 145 L72 146 L70 148 L71 153 L72 151 L73 152 L72 158 L75 160 L74 161 L78 168 L76 169 L75 173 L69 173 L64 171 L60 172 L55 177 L54 183 L55 185 L54 187 L56 189 L55 194 L57 196 L56 197 L58 206 L63 217 L73 216 L79 210 L78 207 L73 206 L67 200 L65 189 L69 184 L77 186 L84 185 L91 186 L93 184 L97 184 L98 185 L97 186 L100 186 L103 191 L96 203 L92 207 L88 216 L89 217 L88 221 L89 223 L93 225 L101 222 L108 222 L112 224 L116 224 L126 219 L143 203 L141 200 L127 201 L125 205 L118 212 L104 212 L103 211 L107 207 L109 207 L108 206 L113 201 L115 201 L116 198 L121 193 L124 192 L125 190 L126 191 L125 190 L129 186 L131 187 L133 184 L140 184 L153 179 L155 180 L157 177 L162 174 L166 175 L165 177 L166 185 L161 194 L154 201 L145 205 L140 209 L119 236 L108 245 L108 248 L111 251 L121 251 L128 249 L131 245 L133 238 L145 223 L157 222 L160 220 L159 216 L164 210 L187 205 L194 200 L195 196 L193 192 L193 186 L200 178 L213 167 L218 155 L218 141 L219 140 L225 143 L226 146 L227 145 L230 147 L233 151 L239 152 L243 156 L250 157 L255 156 L258 158 L256 159 L261 159 L262 160 L260 161 L266 163 L271 163 L273 161 L272 157 L274 156 L276 152 L280 151 L281 149 L291 148 L301 141 L301 124 L294 128 L291 127 L299 115 L300 112 L299 109 L297 109 L288 119 L278 126 L277 124 L280 119 L279 117 L277 117 L264 129 L261 128 L262 127 L261 125 L258 125 L250 131 L248 131 L239 123 L234 123 L224 128 L213 128 L206 121 L195 117 L186 117 L172 122 L170 121 L173 119 L173 117 L168 115 L167 113 L185 100 L189 95 L187 92 L183 95 L181 94 L189 87 L190 85 L186 83 L193 74 L191 71 L199 61 L197 58 L200 55 L201 51 L196 52 L194 51 L200 41 L197 38 L201 30 Z M114 247 L115 246 L116 247 L115 248 Z M117 246 L119 244 L124 245 L119 247 Z M123 244 L124 243 L126 244 L125 245 Z M125 243 L126 242 L127 243 L126 244 Z M146 222 L147 221 L148 222 L147 223 Z M111 219 L112 218 L116 219 L115 220 Z M98 218 L99 217 L100 218 L99 219 Z M146 213 L147 212 L149 213 L148 214 Z M67 211 L68 210 L69 211 L68 212 Z M180 188 L181 191 L179 192 L178 191 Z M181 185 L182 186 L181 189 L180 188 Z M181 184 L182 183 L183 185 L182 186 Z M66 183 L67 182 L68 183 L67 184 Z M174 166 L175 165 L176 166 L175 167 Z M151 164 L152 163 L154 164 L153 165 Z M106 156 L107 155 L108 156 L107 157 Z M265 151 L266 150 L269 151 L268 152 Z M268 150 L270 148 L273 149 L270 151 Z M263 149 L264 148 L266 149 L265 150 Z M188 146 L189 145 L190 146 L189 147 Z M189 145 L190 144 L192 145 L191 146 Z M93 145 L94 144 L95 145 L94 146 Z M241 143 L242 142 L244 143 L243 144 Z M113 143 L114 142 L115 143 L114 144 Z M111 143 L112 142 L113 143 L112 144 Z M277 143 L280 141 L290 142 L288 144 L278 144 Z M247 141 L248 140 L254 141 L253 142 Z M256 140 L257 139 L258 140 L257 141 Z M194 140 L195 139 L196 140 L195 141 Z M163 140 L164 139 L165 140 L164 141 Z M195 139 L196 138 L197 139 L196 140 Z M167 139 L168 138 L170 139 L169 140 Z M164 139 L165 138 L167 139 L166 140 Z M180 138 L181 137 L182 138 L181 139 Z M170 138 L171 137 L173 138 L172 139 Z M272 137 L273 136 L277 137 L276 138 Z M288 135 L289 134 L290 135 L289 136 Z M122 134 L123 133 L125 134 L124 135 Z M296 134 L292 137 L289 136 L291 135 L290 134 L291 133 L293 134 L292 133 L293 132 Z M176 133 L177 132 L179 133 L178 134 Z M161 132 L162 131 L164 132 L163 133 Z M145 132 L146 131 L148 132 L147 133 Z M280 129 L281 128 L283 129 L282 130 Z M289 128 L290 127 L292 128 L291 129 Z M282 128 L283 127 L284 128 L283 129 Z M25 125 L26 124 L27 125 L26 126 Z M161 124 L162 123 L163 124 L162 125 Z M31 124 L32 123 L33 124 L32 125 Z M26 124 L27 123 L28 124 L27 125 Z M167 122 L168 121 L170 122 L169 123 Z M115 121 L116 120 L118 121 L117 122 Z M113 120 L114 119 L116 120 L115 121 Z M135 119 L136 118 L138 119 L137 120 Z M115 119 L116 118 L117 119 L116 120 Z M140 117 L141 116 L142 117 L141 118 Z M33 117 L34 116 L37 117 L36 118 Z M142 116 L143 115 L145 116 L144 117 Z M146 115 L147 114 L149 115 L148 116 Z M164 114 L165 113 L166 114 L165 115 Z M148 114 L149 113 L152 114 L151 115 Z M121 115 L124 113 L127 114 L123 117 Z M39 114 L40 113 L41 114 L40 115 Z M36 114 L37 113 L39 114 L38 115 Z M44 113 L45 112 L46 113 L45 114 Z M137 112 L138 111 L139 112 L138 113 Z M157 111 L158 110 L162 111 L161 112 Z M144 111 L145 110 L147 111 L146 112 Z M121 111 L122 110 L123 111 L122 112 Z M48 111 L49 110 L50 112 L49 113 Z M39 111 L40 110 L41 111 L40 112 Z M147 110 L148 109 L150 110 L149 111 Z M108 110 L109 109 L112 110 L111 111 Z M125 109 L126 108 L127 109 L126 110 Z M105 109 L106 108 L107 109 L106 110 Z M161 109 L164 107 L167 108 L164 110 Z M167 106 L168 105 L169 106 L168 107 Z M144 106 L145 105 L147 106 L146 107 Z M138 106 L139 105 L140 106 L139 107 Z M54 106 L55 105 L56 106 L55 107 Z M56 105 L57 104 L59 105 L58 106 Z M154 104 L152 106 L147 105 L152 103 Z M155 104 L156 102 L161 103 L159 105 Z M47 103 L48 102 L49 103 L48 104 Z M162 102 L163 101 L164 102 L163 103 Z M129 102 L130 101 L131 102 L130 103 Z M127 102 L128 101 L129 102 L128 103 Z M48 102 L49 101 L50 102 L49 103 Z M164 100 L165 99 L167 100 L166 101 Z M154 100 L155 99 L156 100 L155 101 Z M149 100 L150 99 L154 100 L153 101 Z M106 99 L112 104 L109 109 L105 100 Z M166 99 L167 98 L168 99 L167 100 Z M160 99 L161 98 L163 99 L162 100 Z M129 99 L130 98 L131 99 L130 100 Z M53 99 L54 98 L55 99 L54 100 Z M144 98 L145 97 L146 98 L145 99 Z M177 97 L178 96 L179 97 L178 98 Z M146 97 L147 96 L149 97 L148 98 Z M91 97 L92 96 L93 97 L92 98 Z M171 96 L172 95 L173 96 L172 97 Z M168 96 L169 95 L170 96 L169 97 Z M81 93 L82 92 L83 93 L82 94 Z M177 92 L178 91 L179 92 L178 93 Z M159 92 L160 91 L162 92 L161 93 Z M131 92 L132 91 L133 92 L132 93 Z M161 91 L162 90 L164 91 L163 92 Z M163 90 L166 88 L168 89 L166 91 Z M144 89 L145 88 L149 89 L148 90 Z M128 89 L129 88 L130 89 L129 90 Z M167 88 L168 87 L170 88 L169 89 Z M129 88 L130 87 L131 88 L130 89 Z M130 87 L131 86 L132 87 L131 88 Z M131 86 L132 85 L133 86 L132 87 Z M185 84 L186 83 L187 84 L186 85 Z M177 84 L176 86 L172 88 L169 87 L176 83 Z M155 86 L160 83 L164 84 L159 87 Z M177 83 L178 82 L180 83 L179 84 Z M144 83 L145 82 L146 83 L145 84 Z M179 82 L180 81 L182 82 L181 83 Z M147 82 L148 81 L149 82 L148 83 Z M181 81 L182 80 L183 81 L182 82 Z M148 81 L149 80 L151 81 L150 82 Z M182 80 L183 79 L184 80 L183 81 Z M140 80 L141 79 L142 80 L141 81 Z M173 79 L167 84 L164 83 L172 78 Z M157 79 L158 78 L160 79 L159 80 Z M141 79 L142 78 L143 79 L142 80 Z M172 78 L173 77 L174 78 L173 79 Z M174 78 L175 76 L177 77 L175 79 Z M150 77 L151 76 L152 77 L151 78 Z M177 76 L178 75 L179 76 L178 77 Z M159 78 L163 75 L166 76 L162 79 Z M179 74 L180 73 L182 74 L181 75 Z M165 75 L167 73 L170 74 L167 76 Z M181 73 L182 72 L183 73 L182 74 Z M183 72 L184 71 L185 72 L184 73 Z M171 72 L172 71 L173 72 L172 73 Z M156 72 L157 71 L159 72 L158 73 Z M152 72 L153 71 L156 72 L155 73 Z M184 71 L185 70 L186 71 L185 72 Z M185 70 L186 69 L187 70 L186 71 Z M172 70 L173 69 L174 70 L173 71 Z M175 68 L177 66 L179 68 L178 69 Z M178 66 L179 65 L180 66 L179 67 Z M169 66 L170 65 L171 66 L170 67 Z M170 67 L161 72 L159 71 L168 65 Z M183 65 L184 64 L185 65 L184 66 Z M180 65 L181 64 L182 65 L181 66 Z M168 65 L169 64 L170 65 L169 66 Z M184 64 L185 63 L186 64 L185 65 Z M169 64 L170 63 L171 64 L170 65 Z M185 63 L186 62 L187 63 L186 64 Z M171 63 L172 62 L173 63 L172 64 Z M186 62 L187 61 L188 62 L187 63 Z M175 62 L176 61 L177 62 L176 63 Z M172 62 L174 61 L176 63 L174 64 Z M158 62 L159 61 L160 62 L159 63 Z M188 61 L189 60 L190 61 L189 62 Z M175 60 L176 59 L177 60 L176 61 Z M180 58 L181 57 L182 58 L181 59 Z M183 55 L184 54 L185 55 L184 56 Z M184 54 L185 53 L186 54 L185 55 Z M154 43 L155 42 L156 43 L155 44 Z M155 42 L156 41 L157 42 L156 43 Z"/></symbol></svg>
+
+  <div class="page">
+    <header class="site-header">
+      <div class="container navbar">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio de Pegaso Club">
+          <span class="brand-logo" aria-hidden="true">
+            <svg class="pegaso-svg" viewBox="0 0 320 270" focusable="false"><use href="#pegaso-mark"></use></svg>
+          </span>
+          <span class="brand-name">Pegaso Club</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="#servicios">Servicios</a>
+          <a href="#metodo">Método</a>
+          <a href="#seo">Google</a>
+          <a href="#diagnostico">Diagnóstico</a>
+          <a href="#planes">Planes</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <button class="mobile-menu-button" type="button" aria-label="Abrir menú móvil" aria-expanded="false">☰</button>
+        <a class="button button-primary desktop-cta" href="#contacto">Solicita tu diagnóstico</a>
+      </div>
+
+      <nav class="mobile-menu" aria-label="Navegación móvil">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Método</a>
+        <a href="#seo">Google</a>
+        <a href="#diagnostico">Diagnóstico</a>
+        <a href="#planes">Planes</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Solicita tu diagnóstico</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Simple curiosidad convertida en crecimiento
+            </div>
+
+            <h1>Estrategia, webs y automatización para empresas que quieren <span class="highlight">vender más.</span></h1>
+
+            <p class="hero-lead">
+              Pegaso Club ayuda a empresas a digitalizarse, optimizar procesos y crecer con una presencia digital seria: páginas web elegantes, marketing digital, SEO, automatización y estrategia comercial clara.
+            </p>
+
+            <div class="brand-signature" aria-label="Identidad visual de Pegaso Club">
+              <span class="brand-signature-mark" aria-hidden="true">
+                <svg class="pegaso-svg" viewBox="0 0 320 270" focusable="false"><use href="#pegaso-mark"></use></svg>
+              </span>
+              <span>Portal corporativo serio · Marca digital preparada para captar clientes</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#contacto">Solicitar diagnóstico gratuito</a>
+              <a class="button button-secondary" href="#servicios">Ver cómo trabajamos</a>
+            </div>
+
+            <div class="proof-grid">
+              <div class="proof-card">
+                <strong data-count="7814">0</strong>
+                <span>Comunidad inicial alrededor de la marca.</span>
+              </div>
+              <div class="proof-card">
+                <strong data-count="939">0</strong>
+                <span>Visualizaciones recientes como señal de atención.</span>
+              </div>
+              <div class="proof-card">
+                <strong>0 ruido</strong>
+                <span>Mensajes claros, diseño limpio y objetivo comercial.</span>
+              </div>
+            </div>
+
+            <div class="mobile-metrics" aria-label="Métricas principales">
+              <div>
+                <strong>7.814</strong>
+                <span>seguidores</span>
+              </div>
+              <div>
+                <strong>939</strong>
+                <span>vistas / 30 días</span>
+              </div>
+              <div>
+                <strong>24/7</strong>
+                <span>captación</span>
+              </div>
+            </div>
+
+            <div class="trust-grid">
+              <div class="trust-card"><b>Web rápida</b>Diseño responsive preparado para convertir.</div>
+              <div class="trust-card"><b>SEO base</b>Estructura para servicios, ciudad y búsquedas reales.</div>
+              <div class="trust-card"><b>Automatización</b>Contacto y seguimiento más ordenado.</div>
+              <div class="trust-card"><b>Marca seria</b>Confianza desde el primer segundo.</div>
+            </div>
+          </div>
+
+          <aside class="hero-visual" aria-label="Vista de perfil de Pegaso Club">
+            <svg class="pegaso-svg logo-watermark" viewBox="0 0 320 270" focusable="false" aria-hidden="true"><use href="#pegaso-mark"></use></svg>
+
+            <div class="phone-card">
+              <div class="phone-topbar">
+                <span>pegasoclub⌄</span>
+                <span>＋ ◎ ☰</span>
+              </div>
+
+              <div class="instagram-head">
+                <div class="avatar">
+                  <div class="profile-bubble">Simple curi<br />osidad...</div>
+                  <svg class="pegaso-svg" viewBox="0 0 320 270" focusable="false" aria-label="Foto de perfil de Pegaso Club"><use href="#pegaso-mark"></use></svg>
+                </div>
+
+                <div class="instagram-stats">
+                  <div><strong>0</strong><span>publicaciones</span></div>
+                  <div><strong>7.814</strong><span>seguidores</span></div>
+                  <div><strong>0</strong><span>amigos</span></div>
+                </div>
+              </div>
+
+              <div class="instagram-bio">
+                <b>Estrategia, webs y automatización para empresas 🚀</b><br />
+                Digitaliza, optimiza y vende más ⚡<br />
+                ↓ Solicita tu diagnóstico.
+              </div>
+
+              <div class="instagram-insight">
+                <strong>Panel para profesionales</strong>
+                <span><b class="green-text">↗</b> 939 visualizaciones en los últimos 30 días.</span>
+              </div>
+
+              <div class="phone-preview">
+                <div class="pegaso-emblem">
+                  <svg class="pegaso-svg" viewBox="0 0 320 270" focusable="false" aria-label="Emblema de Pegaso Club"><use href="#pegaso-mark"></use></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-note">
+              <strong>De perfil a portal serio.</strong>
+              <p>La web convierte la idea del Instagram en una marca comercial con servicios, confianza y captación.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="servicios">
+        <div class="container">
+          <div class="section-header">
+            <h2>Lo que hace Pegaso Club.</h2>
+            <p>Una solución digital completa para empresas que quieren dejar de improvisar y empezar a captar clientes con un sistema profesional.</p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div>
+                <div class="service-icon">◆</div>
+                <h3>Páginas web serias</h3>
+                <p>Webs corporativas, landings y portales de empresa con estética elegante, textos comerciales y estructura pensada para convertir visitas en contactos.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div>
+                <div class="service-icon">⌕</div>
+                <h3>SEO y Google</h3>
+                <p>Preparamos tu web para competir en Google. El objetivo es que cuando alguien busque tus servicios, tu empresa aparezca antes que la competencia.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div>
+                <div class="service-icon">↗</div>
+                <h3>Marketing digital</h3>
+                <p>Construimos mensajes, campañas, contenido y embudos para atraer tráfico cualificado, mejorar marca y aumentar oportunidades comerciales.</p>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div>
+                <div class="service-icon">⚙</div>
+                <h3>Automatización</h3>
+                <p>Automatizamos formularios, WhatsApp, respuestas, bases de datos, seguimiento de clientes y procesos repetitivos.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container manifesto-card">
+          <h2>Digitaliza. Optimiza. Vende más.</h2>
+
+          <div class="quotes-grid">
+            <div class="quote-card">“Tu página web será la primera impresión de tu empresa. Hacemos que parezca <span>profesional, fiable y preparada para vender.</span>”</div>
+            <div class="quote-card">“No necesitas solo una web bonita. Necesitas un sistema que explique lo que haces, genere confianza y convierta.”</div>
+            <div class="quote-card">“Trabajamos para que tu empresa aparezca en Google cuando tus clientes ya están buscando una solución.”</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo">
+        <div class="container">
+          <div class="section-header">
+            <h2>Un método claro para convertir una empresa en marca digital.</h2>
+            <p>Desde la auditoría hasta la publicación, cada fase tiene un objetivo: claridad, confianza, visibilidad y ventas.</p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="step-card">
+              <h3>Diagnóstico</h3>
+              <p>Revisamos negocio, sector, competencia, clientes y presencia actual. Detectamos qué falla y qué puede crecer más rápido.</p>
+            </article>
+
+            <article class="step-card">
+              <h3>Estrategia</h3>
+              <p>Definimos mensaje, posicionamiento, oferta, estructura web y llamadas a la acción para captar contactos reales.</p>
+            </article>
+
+            <article class="step-card">
+              <h3>Construcción</h3>
+              <p>Creamos una web elegante, rápida, responsive y preparada para transmitir confianza desde el primer segundo.</p>
+            </article>
+
+            <article class="step-card">
+              <h3>Escalado</h3>
+              <p>Activamos SEO, medición, automatizaciones y mejoras para que el sistema no se quede parado después de publicar.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="seo">
+        <div class="container seo-panel">
+          <div class="seo-copy">
+            <h2>Tu página web tiene que trabajar incluso cuando tú no estás.</h2>
+            <p>Una web profesional no es un escaparate muerto: es un comercial 24/7. Explica tus servicios, filtra clientes, genera confianza, recoge solicitudes y ayuda a que tu empresa pueda salir en Google.</p>
+            <a class="button button-primary" href="#contacto">Quiero aparecer en Google</a>
+          </div>
+
+          <div class="search-preview-wrap">
+            <div class="search-preview">
+              <div class="searchbar">mejor empresa de servicios cerca de mí</div>
+
+              <div class="search-result">
+                <span>Resultado destacado</span>
+                <h4>Tu empresa | Servicio profesional en tu ciudad</h4>
+                <p>Web clara, propuesta potente, contacto rápido y posicionamiento trabajado por Pegaso Club.</p>
+              </div>
+
+              <div class="search-result">
+                <span>Competidor</span>
+                <h4>Otra empresa del sector</h4>
+                <p>Web antigua, mensaje genérico y poca confianza visual.</p>
+              </div>
+
+              <div class="search-result">
+                <span>Directorio</span>
+                <h4>Listado local</h4>
+                <p>Información básica sin diferenciación ni experiencia de marca.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostico">
+        <div class="container diagnostic-grid">
+          <div class="diagnostic-card">
+            <h2>Diagnóstico digital interactivo.</h2>
+            <p>Una empresa no necesita “estar en internet” sin más. Necesita una presencia que explique bien lo que vende, aparezca en búsquedas relevantes y convierta visitas en conversaciones comerciales.</p>
+
+            <div class="tabs" role="tablist" aria-label="Áreas del diagnóstico">
+              <button class="tab-button active" type="button" data-tab="tab-web">Web</button>
+              <button class="tab-button" type="button" data-tab="tab-seo">SEO</button>
+              <button class="tab-button" type="button" data-tab="tab-auto">Automatización</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-web">
+              <div class="audit-item">✓ Diseño serio y adaptado a móvil</div>
+              <div class="audit-item">✓ Mensaje claro en los primeros 5 segundos</div>
+              <div class="audit-item">✓ Botones de contacto visibles y directos</div>
+            </div>
+
+            <div class="tab-panel" id="tab-seo">
+              <div class="audit-item">✓ Palabras clave por servicio y ciudad</div>
+              <div class="audit-item">✓ Estructura preparada para Google</div>
+              <div class="audit-item">✓ Contenido pensado para búsquedas reales</div>
+            </div>
+
+            <div class="tab-panel" id="tab-auto">
+              <div class="audit-item">✓ Formularios conectados a WhatsApp o email</div>
+              <div class="audit-item">✓ Seguimiento automático de oportunidades</div>
+              <div class="audit-item">✓ Menos tareas repetitivas y más control comercial</div>
+            </div>
+          </div>
+
+          <div class="calculator-card">
+            <h3>Simulador rápido de oportunidades.</h3>
+            <p>Ajusta una estimación simple para visualizar por qué una web seria y bien planteada puede cambiar la captación mensual.</p>
+
+            <div class="range-group">
+              <div class="range-label">
+                <span>Visitas mensuales</span>
+                <strong id="visitsValue">800</strong>
+              </div>
+              <input id="visitsRange" type="range" min="100" max="5000" step="100" value="800" />
+            </div>
+
+            <div class="range-group">
+              <div class="range-label">
+                <span>Conversión estimada</span>
+                <strong id="conversionValue">3%</strong>
+              </div>
+              <input id="conversionRange" type="range" min="1" max="15" step="1" value="3" />
+            </div>
+
+            <div class="range-group">
+              <div class="range-label">
+                <span>Valor medio por cliente</span>
+                <strong id="ticketValue">250€</strong>
+              </div>
+              <input id="ticketRange" type="range" min="50" max="2000" step="50" value="250" />
+            </div>
+
+            <div class="calculator-results">
+              <div class="calculator-result">
+                <strong id="leadsOut">24</strong>
+                <span>contactos potenciales / mes</span>
+              </div>
+              <div class="calculator-result">
+                <strong id="salesOut">6</strong>
+                <span>clientes estimados / mes</span>
+              </div>
+              <div class="calculator-result">
+                <strong id="revenueOut">1.500€</strong>
+                <span>valor potencial generado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-header">
+            <h2>Resultados que buscamos provocar.</h2>
+            <p>No prometemos humo. Construimos activos digitales que aumentan las probabilidades de captar clientes.</p>
+          </div>
+
+          <div class="growth-grid">
+            <article class="growth-card">
+              <strong>01</strong>
+              <h3>Más confianza</h3>
+              <p>Cuando tu web parece profesional, tu empresa parece más seria. Eso reduce dudas y mejora la primera impresión.</p>
+            </article>
+
+            <article class="growth-card">
+              <strong>02</strong>
+              <h3>Más visibilidad</h3>
+              <p>Una estructura SEO correcta ayuda a que Google entienda tu negocio, tu zona y tus servicios principales.</p>
+            </article>
+
+            <article class="growth-card">
+              <strong>03</strong>
+              <h3>Más conversión</h3>
+              <p>Mensajes claros, botones visibles, formularios simples y contacto directo para transformar visitas en oportunidades.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="planes">
+        <div class="container">
+          <div class="section-header">
+            <h2>Planes para empresas que quieren empezar en serio.</h2>
+            <p>Cada propuesta puede adaptarse según sector, ciudad, nivel de competencia y objetivos comerciales.</p>
+          </div>
+
+          <div class="plans-grid">
+            <article class="plan-card">
+              <div>
+                <span class="plan-tag">Inicio</span>
+                <h3>Presencia Web</h3>
+                <p>Para empresas que necesitan imagen profesional y una web clara.</p>
+                <ul>
+                  <li>Diseño web corporativo</li>
+                  <li>Adaptación a móvil</li>
+                  <li>Formulario de contacto</li>
+                  <li>Textos comerciales base</li>
+                  <li>Integración con WhatsApp</li>
+                </ul>
+              </div>
+              <a class="button button-secondary" href="#contacto">Solicitar propuesta</a>
+            </article>
+
+            <article class="plan-card featured">
+              <div>
+                <span class="plan-tag">Recomendado</span>
+                <h3>Crecimiento Digital</h3>
+                <p>Para negocios que quieren captar clientes y diferenciarse.</p>
+                <ul>
+                  <li>Web premium orientada a conversión</li>
+                  <li>SEO inicial por servicios y zona</li>
+                  <li>Estructura para aparecer en Google</li>
+                  <li>Copywriting comercial</li>
+                  <li>Medición de conversiones</li>
+                </ul>
+              </div>
+              <a class="button button-dark" href="#contacto">Empezar ahora</a>
+            </article>
+
+            <article class="plan-card">
+              <div>
+                <span class="plan-tag">Escala</span>
+                <h3>Automatización Pro</h3>
+                <p>Para empresas que quieren ahorrar tiempo y ordenar procesos.</p>
+                <ul>
+                  <li>Automatización de contactos</li>
+                  <li>CRM o base de datos comercial</li>
+                  <li>Embudos de captación</li>
+                  <li>Seguimiento de oportunidades</li>
+                  <li>Mejora continua mensual</li>
+                </ul>
+              </div>
+              <a class="button button-secondary" href="#contacto">Hablar con Pegaso Club</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="container">
+          <div class="section-header">
+            <h2>Preguntas antes de digitalizarse.</h2>
+            <p>Respuestas directas para entender qué puede aportar Pegaso Club a un negocio real.</p>
+          </div>
+
+          <div class="faq-grid">
+            <article class="faq-card open">
+              <h3>¿Pegaso Club solo hace páginas web?</h3>
+              <p>No. La web es el centro, pero el objetivo es construir un sistema: estrategia, SEO, automatización, captación y mejora continua.</p>
+            </article>
+
+            <article class="faq-card">
+              <h3>¿Mi empresa puede salir la primera en Google?</h3>
+              <p>Se trabaja para mejorar la posición con una estructura SEO sólida, contenido útil y optimización técnica. La primera posición depende del sector, ciudad y competencia.</p>
+            </article>
+
+            <article class="faq-card">
+              <h3>¿Qué tipo de empresas encajan?</h3>
+              <p>Negocios locales, servicios profesionales, empresas de reformas, clínicas, asesorías, academias, comercios y marcas que necesitan captar clientes online.</p>
+            </article>
+
+            <article class="faq-card">
+              <h3>¿Por dónde empezamos?</h3>
+              <p>Con un diagnóstico: qué tienes ahora, qué quieres vender, quién es tu cliente y qué necesita tu presencia digital para convertir mejor.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="contacto">
+        <div class="container cta-box">
+          <h2>Convierte tu empresa en una marca digital seria.</h2>
+          <p>Solicita un diagnóstico y recibe una propuesta clara para mejorar tu web, tu presencia en Google, tu captación y tus procesos comerciales.</p>
+
+          <form class="contact-form">
+            <input class="form-input" required placeholder="Nombre de empresa" />
+            <input class="form-input" required placeholder="Email o WhatsApp" />
+            <input class="form-input" placeholder="Sector" />
+            <input class="form-input" placeholder="Ciudad" />
+            <textarea class="form-textarea" required placeholder="Cuéntanos qué quieres mejorar: web, Google, automatización, marketing..."></textarea>
+            <button class="button button-primary" type="submit">Preparar diagnóstico</button>
+            <div class="form-note">Este formulario es una maqueta funcional: muestra feedback visual y está preparado para conectarse a email, WhatsApp, CRM o automatizaciones.</div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Pegaso Club. Estrategia, webs y automatización para empresas.</span>
+        <span>Digitaliza · Optimiza · Vende más</span>
+      </div>
+    </footer>
+  </div>
+
+  <nav class="mobile-bottom-nav" aria-label="Navegación móvil rápida">
+    <a href="#inicio"><b>⌂</b>Inicio</a>
+    <a href="#servicios"><b>◆</b>Servicios</a>
+    <a href="#seo"><b>⌕</b>Google</a>
+    <a href="#contacto"><b>⚡</b>Contacto</a>
+  </nav>
+
+  <a class="sticky-contact" href="#contacto">⚡ Solicita tu diagnóstico</a>
+  <div class="toast" role="status" aria-live="polite">Solicitud preparada. Revisa tus datos y envíala.</div>
+
+  <script>
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+    const progressBar = $(".progress-bar");
+    const stickyContact = $(".sticky-contact");
+    const cursorGlow = $(".cursor-glow");
+    const mobileButton = $(".mobile-menu-button");
+    const mobileMenu = $(".mobile-menu");
+    const toast = $(".toast");
+
+    function updateScrollUI() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+
+      if (progressBar) {
+        progressBar.style.width = progress + "%";
+      }
+
+      if (stickyContact) {
+        stickyContact.classList.toggle("visible", window.scrollY > 620);
+      }
+    }
+
+    window.addEventListener("scroll", updateScrollUI, { passive: true });
+    updateScrollUI();
+
+    window.addEventListener("pointermove", (event) => {
+      if (!cursorGlow) return;
+      cursorGlow.style.left = event.clientX + "px";
+      cursorGlow.style.top = event.clientY + "px";
+    }, { passive: true });
+
+    if (mobileButton && mobileMenu) {
+      mobileButton.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+        mobileButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      $$(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          mobileButton.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    const navLinks = $$(".nav-links a");
+    const bottomNavLinks = $$(".mobile-bottom-nav a");
+    const observedSections = ["#inicio", "#servicios", "#metodo", "#seo", "#diagnostico", "#planes", "#faq", "#contacto"]
+      .map((id) => $(id))
+      .filter(Boolean);
+
+    const activeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const activeId = "#" + entry.target.id;
+
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === activeId);
+        });
+
+        bottomNavLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === activeId);
+        });
+      });
+    }, {
+      rootMargin: "-35% 0px -55% 0px",
+      threshold: 0.01
+    });
+
+    observedSections.forEach((section) => activeObserver.observe(section));
+
+    const revealElements = $$(".service-card, .step-card, .manifesto-card, .seo-panel, .growth-card, .plan-card, .faq-card, .cta-box, .trust-card, .diagnostic-card, .calculator-card");
+
+    revealElements.forEach((element) => element.classList.add("reveal"));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    $$(".reveal").forEach((element) => revealObserver.observe(element));
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const element = entry.target;
+        const target = Number(element.dataset.count || 0);
+        let current = 0;
+        const steps = 52;
+        const increment = target / steps;
+
+        const timer = window.setInterval(() => {
+          current += increment;
+
+          if (current >= target) {
+            current = target;
+            window.clearInterval(timer);
+          }
+
+          element.textContent = Math.round(current).toLocaleString("es-ES");
+        }, 18);
+
+        counterObserver.unobserve(element);
+      });
+    }, {
+      threshold: 0.7
+    });
+
+    $$("[data-count]").forEach((element) => counterObserver.observe(element));
+
+    $$(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const panelId = button.dataset.tab;
+        const targetPanel = panelId ? $("#" + panelId) : null;
+
+        $$(".tab-button").forEach((item) => item.classList.remove("active"));
+        $$(".tab-panel").forEach((panel) => panel.classList.remove("active"));
+
+        button.classList.add("active");
+
+        if (targetPanel) {
+          targetPanel.classList.add("active");
+        }
+      });
+    });
+
+    function updateCalculator() {
+      const visitsRange = $("#visitsRange");
+      const conversionRange = $("#conversionRange");
+      const ticketRange = $("#ticketRange");
+
+      if (!visitsRange || !conversionRange || !ticketRange) return;
+
+      const visits = Number(visitsRange.value);
+      const conversion = Number(conversionRange.value);
+      const ticket = Number(ticketRange.value);
+      const leads = Math.round((visits * conversion) / 100);
+      const sales = Math.max(1, Math.round(leads * 0.25));
+      const revenue = sales * ticket;
+
+      $("#visitsValue").textContent = visits.toLocaleString("es-ES");
+      $("#conversionValue").textContent = conversion + "%";
+      $("#ticketValue").textContent = ticket.toLocaleString("es-ES") + "€";
+      $("#leadsOut").textContent = leads.toLocaleString("es-ES");
+      $("#salesOut").textContent = sales.toLocaleString("es-ES");
+      $("#revenueOut").textContent = revenue.toLocaleString("es-ES") + "€";
+    }
+
+    ["#visitsRange", "#conversionRange", "#ticketRange"].forEach((selector) => {
+      const input = $(selector);
+      if (input) {
+        input.addEventListener("input", updateCalculator);
+      }
+    });
+
+    updateCalculator();
+
+    $$(".faq-card").forEach((item) => {
+      item.addEventListener("click", () => {
+        $$(".faq-card").forEach((faq) => {
+          if (faq !== item) {
+            faq.classList.remove("open");
+          }
+        });
+
+        item.classList.toggle("open");
+      });
+    });
+
+    const contactForm = $(".contact-form");
+
+    if (contactForm && toast) {
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        toast.classList.add("show");
+
+        window.setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3200);
+      });
+    }
+  </script>
+</body>
+</html>
