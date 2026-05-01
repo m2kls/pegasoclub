@@ -1792,18 +1792,21 @@
         color: var(--cream);
       }
 
-      .toast {
-        right: 14px;
-        bottom: 88px;
-        left: 14px;
-        border-radius: 22px;
-        text-align: center;
-        transform: translateY(130px);
-      }
+     .toast {
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  left: 14px;
+  border-radius: 22px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(140%);
+}
 
-      .toast.show {
-        transform: translateY(0);
-      }
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
     }
 
     @media (max-width: 420px) {
